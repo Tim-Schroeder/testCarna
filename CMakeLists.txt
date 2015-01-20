@@ -60,7 +60,7 @@ include( $ENV{MEDITEC_LIBS}/CARNA/2.4.0/configure.cmake )
 
 include_directories( ${CMAKE_PROJECT_DIR}src/include )
 set( PRIVATE_HEADERS
-#		src/include/test.h
+
 	)
 set( SRC
 		src/main.cpp
