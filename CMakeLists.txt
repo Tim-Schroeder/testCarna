@@ -38,23 +38,31 @@ option(BUILD_TEST	"Build the unit tests"				OFF)
 # include( $ENV{MEDITEC_LIBS}/<LibName>/configure.cmake )
 ############################################
 
+
+#Carna
+list(APPEND CMAKE_MODULE_PATH "${MEDITEC_LIBS}/Carna/2.5")
+include( $ENV{MEDITEC_LIBS}/CARNA/2.5.1/configure.cmake )
+
+#Carna-DICOM
+list(APPEND CMAKE_MODULE_PATH "${MEDITEC_LIBS}/CarnaDICOM/0.1")
+include( $ENV{MEDITEC_LIBS}/CarnaDICOM/0.1.1/configure.cmake )
+
 # Qt
-set( QT_USE_QTMAIN		TRUE )
-find_package ( Qt5Core )
-# sinclude ( ${QT_USE_FILE} )
+set ( QT_USE_QTMAIN		TRUE )
+set ( QT_USE_QTOPENGL	TRUE )
+find_package( Qt4 4.8.0 REQUIRED )
+include ( ${QT_USE_FILE} )
 add_definitions( ${QT_DEFINITIONS} )
 
 #GLEW
 #include( $ENV{MEDITEC_LIBS}/GLEW/1.7.0/configure.cmake )
 
 #TRTK
-#include( $ENV{MEDITEC_LIBS}/TRTK/0.13.1/configure.cmake )
+include( $ENV{MEDITEC_LIBS}/TRTK/0.13.1/configure.cmake )
 
 #Eigen
-#include( $ENV{MEDITEC_LIBS}/EIGEN/3.2.0/configure.cmake )
+include( $ENV{MEDITEC_LIBS}/EIGEN/3.0.5/configure.cmake )
 
-#Carna
-include( $ENV{MEDITEC_LIBS}/CARNA/2.4.0/configure.cmake )
 
 # Project
 
@@ -86,7 +94,8 @@ add_definitions( -DNOMINMAX  )
 
 target_link_libraries(  ${TARGET_NAME}
 			${CARNA_LIBLIST} 
-			Qt5::Core	)
+			${CARNA_DICOM_LIBLIST}
+			${QT_LIBRARIES}					)
 
 
 
